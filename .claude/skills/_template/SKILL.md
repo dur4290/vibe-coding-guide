@@ -1,3 +1,9 @@
+---
+name: 스킬이름
+description: 이 스킬이 하는 일을 한 줄로 설명하세요 (트리거 문구 포함)
+allowed-tools: Read, Write, Bash, Glob
+---
+
 # 스킬 이름 (여기를 바꾸세요)
 
 > 이 파일은 새 스킬을 만들 때 사용하는 **템플릿**입니다.
