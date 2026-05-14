@@ -65,6 +65,8 @@ vibe-workspace/
 | `web-scraper` | "웹에서 데이터 가져와줘", "이 사이트 긁어줘" |
 | `pdf` | "PDF 읽어줘", "PDF 내용 요약해줘" |
 | `skill-creator` | "새 스킬 만들어줘", "XXX 스킬 만들어줘" |
+| `slash-command-creator` | "새 커맨드 만들어줘", "/XXX 커맨드 만들어줘" |
+| `subagent-creator` | "새 에이전트 만들어줘", "XXX 에이전트 만들어줘" |
 
 ---
 
