@@ -69,6 +69,8 @@ vibe-workspace/
 | `web-scraper` | "웹에서 데이터 가져와줘", "이 사이트 긁어줘" |
 | `pdf` | "PDF 읽어줘", "PDF 내용 요약해줘" |
 | `skill-creator` | "새 스킬 만들어줘", "XXX 스킬 만들어줘" |
+| `slash-command-creator` | "새 커맨드 만들어줘", "/XXX 커맨드 만들어줘" |
+| `subagent-creator` | "새 에이전트 만들어줘", "XXX 에이전트 만들어줘" |
 
 ---
 
@@ -79,6 +81,7 @@ vibe-workspace/
 | 에이전트 | 역할 |
 |----------|------|
 | `code-simplifier` | 코드 이해가 안 갈 때, 새 코드가 만들어졌을 때 주석·정리 |
+| `markdown-optimizer` | SKILL.md나 커맨드 파일이 너무 길어졌을 때 토큰 절약 정리 |
 
 ---
 
