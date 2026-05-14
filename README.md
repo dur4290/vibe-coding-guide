@@ -4,10 +4,9 @@
 
 ## 시작하기
 
-1. PowerShell에서 `.\setup.ps1` 실행
-2. VSCode에서 이 폴더 열기
-3. 터미널에서 `claude` 입력
-4. `/start` 입력해서 시작
+1. VSCode에서 이 폴더 열기
+2. 터미널(`Ctrl + 백틱`)에서 `claude` 입력
+3. 나머지는 Claude가 안내해줍니다
 
 ---
 
