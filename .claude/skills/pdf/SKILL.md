@@ -30,12 +30,10 @@ PDF 파일을 다루는 Python 스크립트를 만들어드립니다.
 
 ## 필요한 패키지
 
-```bash
-pip install pypdf pdfplumber
-```
-
 - `pypdf`: 빠른 텍스트 추출, 기본 PDF 처리
 - `pdfplumber`: 표 추출, 더 정확한 텍스트 위치 정보
+
+Claude가 자동으로 설치해줄게요.
 
 ---
 

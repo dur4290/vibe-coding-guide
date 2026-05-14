@@ -25,9 +25,9 @@ Claude Code에서 이렇게 말하면 됩니다:
 XXX 스킬 써줘
 ```
 
-또는 직접 실행:
-```bash
-python .claude/skills/스킬이름/main.py
+또는 Claude Code에게:
+```
+.claude/skills/스킬이름/main.py 실행해줘
 ```
 
 ## 필요한 것

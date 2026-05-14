@@ -109,14 +109,12 @@ if __name__ == "__main__":
 
 ---
 
-## 필요한 패키지 설치
+## 필요한 패키지
 
-```bash
-pip install requests beautifulsoup4
-# JavaScript 사이트라면:
-pip install playwright
-python -m playwright install chromium
-```
+- 일반 사이트: `requests`, `beautifulsoup4`
+- JavaScript 사이트: `playwright`
+
+Claude가 스크립트를 만들면서 필요한 패키지를 자동으로 설치해줄게요.
 
 ---
 

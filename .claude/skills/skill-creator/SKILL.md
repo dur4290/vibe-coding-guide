@@ -71,10 +71,7 @@ allowed-tools: Read, Write, Bash, Glob
 
 ### 2단계: 기존 스킬 확인
 
-```bash
-ls .claude/skills/
-```
-비슷한 스킬이 이미 있으면 알려주고 확장할지 새로 만들지 물어봐.
+`.claude/skills/` 폴더를 확인해서 비슷한 스킬이 이미 있으면 알려주고 확장할지 새로 만들지 물어봐.
 
 ### 3단계: 스킬 생성
 
