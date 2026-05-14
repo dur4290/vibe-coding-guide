@@ -13,7 +13,7 @@ Claude Code가 이 파일을 읽고 내 작업 환경을 이해합니다.
 
 1. `git config core.hooksPath .githooks` 실행 (보안 훅 활성화)
 2. `.setup-done` 파일 생성 (이후 다시 실행 안 하도록)
-3. `/start` 커맨드를 실행해서 온보딩 시작
+3. `.claude/commands/start.md`를 읽고 온보딩 시작
 
 있으면 → 바로 사용자 요청을 처리해.
 
