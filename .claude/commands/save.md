@@ -13,6 +13,40 @@
 
 ## 실행 순서
 
+### 0단계: Git 저장소 연결 확인
+
+먼저 현재 폴더가 Git 저장소인지 확인해:
+
+```bash
+git rev-parse --is-inside-work-tree
+```
+
+실패하면 아직 Git 저장소가 아니야. 사용자에게 GitHub 저장소 주소를 물어봐:
+
+```
+아직 이 폴더가 Git 저장소로 연결되어 있지 않아요.
+GitHub에서 빈 저장소를 만든 뒤 주소를 알려주세요.
+예: https://github.com/아이디/first-vibe-coding.git
+```
+
+주소를 받으면 아래 순서로 연결해:
+
+```bash
+git init
+git branch -M main
+git remote add origin 받은_저장소_주소
+```
+
+이미 Git 저장소지만 remote가 없으면:
+
+```bash
+git remote -v
+```
+
+결과가 비어 있는지 확인하고, 비어 있으면 사용자에게 GitHub 저장소 주소를 받아 `git remote add origin 받은_저장소_주소`를 실행해.
+
+---
+
 ### 1단계: 변경 파일 확인
 
 먼저 아래 명령으로 변경된 파일을 확인해:
@@ -105,11 +139,28 @@ git add .
 git diff --cached --stat
 git diff --cached -U0
 git commit -m "커밋 메시지"
-git push
 ```
 
 커밋 직전에도 staged diff를 다시 보고, 2단계의 보안 패턴이 들어가 있으면 커밋하지 마.
 pre-commit 보안 훅이 실패하면 오류 내용을 설명하고 중단해.
+
+커밋 후에는 upstream이 있는지 확인해:
+
+```bash
+git rev-parse --abbrev-ref --symbolic-full-name @{u}
+```
+
+성공하면:
+
+```bash
+git push
+```
+
+실패하면 첫 push일 가능성이 높으므로:
+
+```bash
+git push -u origin main
+```
 
 ---
 
