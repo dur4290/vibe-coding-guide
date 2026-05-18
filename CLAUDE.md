@@ -9,9 +9,11 @@ Claude Code가 이 파일을 읽고 내 작업 환경을 이해합니다.
 **대화가 시작될 때마다 `.setup-done` 파일이 있는지 확인해줘.**
 
 없으면 → 아무 말 없이 자동으로 실행해:
-1. `git config core.hooksPath .githooks` (보안 훅 활성화)
-2. `.setup-done` 파일 생성
-3. `.claude/commands/start.md`를 읽고 온보딩 시작
+1. `git rev-parse --is-inside-work-tree`로 Git 저장소인지 확인
+2. Git 저장소이면 `git config core.hooksPath .githooks` 실행 (보안 훅 활성화)
+3. Git 저장소가 아니면 훅 설정은 건너뛰기 (`/save` 때 다시 설정)
+4. `.setup-done` 파일 생성
+5. `.claude/commands/start.md`를 읽고 온보딩 시작
 
 있으면 → 바로 사용자 요청을 처리해.
 
@@ -122,6 +124,8 @@ vibe-workspace/
 | 완성된 단일 자동화 스크립트 | `scripts/` | `기능이름.py` |
 
 마크다운 보고서를 만들 때는 먼저 `notes/reports/` 폴더가 있는지 확인하고, 없으면 자동으로 만들어줘. 파일을 만든 뒤에는 학생에게 저장된 경로와 VSCode 미리보기 여는 방법만 짧게 알려줘.
+
+파일 정리 자동화처럼 단일 Python 스크립트를 만들 때는 먼저 `scripts/` 폴더에 저장해줘. 예를 들어 파일 정리 스크립트는 `scripts/organize.py`로 저장하는 것이 기본이야.
 
 ---
 

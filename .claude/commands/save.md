@@ -35,6 +35,7 @@ GitHub에서 빈 저장소를 만든 뒤 주소를 알려주세요.
 git init
 git branch -M main
 git remote add origin 받은_저장소_주소
+git config core.hooksPath .githooks
 ```
 
 이미 Git 저장소지만 remote가 없으면:
@@ -44,6 +45,15 @@ git remote -v
 ```
 
 결과가 비어 있는지 확인하고, 비어 있으면 사용자에게 GitHub 저장소 주소를 받아 `git remote add origin 받은_저장소_주소`를 실행해.
+
+remote origin이 이미 있지만 `github.com/dur4290/vibe-coding-guide`를 가리키면 학생 개인 저장소가 아니라 배포용 원본 저장소야. 이때는 사용자에게 본인 저장소 주소를 받아 아래처럼 바꿔:
+
+```bash
+git remote set-url origin 받은_저장소_주소
+git config core.hooksPath .githooks
+```
+
+Git 저장소 연결이 끝나면 `.githooks` 폴더가 있는지 확인하고, 있으면 항상 `git config core.hooksPath .githooks`를 실행해.
 
 ---
 

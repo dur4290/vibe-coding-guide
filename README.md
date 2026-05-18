@@ -89,8 +89,9 @@ vibe-workspace/
 
 이 워크스페이스는 VSCode에서 열고 Claude와 대화를 시작하면 자동으로 설정돼요.
 
-- `.setup-done` 파일이 없으면 → 자동으로 보안 훅 설정 + `/start` 온보딩 시작
+- `.setup-done` 파일이 없으면 → `/start` 온보딩 시작
 - `.setup-done` 파일이 있으면 → 바로 작업 시작
+- GitHub 저장소와 연결된 뒤에는 `/save`가 보안 훅을 자동으로 활성화합니다
 
 별도로 PowerShell이나 터미널 설정이 필요하지 않습니다.
 
@@ -101,6 +102,9 @@ vibe-workspace/
 Claude에게 보고서나 조사 문서를 만들어달라고 하면 기본적으로 `notes/reports/` 폴더에 마크다운 파일로 저장됩니다.
 
 예를 들어 “인기 AI 도구를 조사해서 마크다운 보고서를 만들어줘”라고 요청하면, Claude가 `notes/reports/2026-05-18-ai-tools-report.md` 같은 파일을 자동으로 만듭니다.
+
+단일 자동화 스크립트는 기본적으로 `scripts/` 폴더에 저장됩니다.
+예를 들어 파일 정리 자동화는 `scripts/organize.py`처럼 저장하면 됩니다.
 
 ---
 
