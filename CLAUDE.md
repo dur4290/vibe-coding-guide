@@ -32,7 +32,8 @@ vibe-workspace/
 ├── notes/
 │   ├── tasks/         ← /clarify로 만든 자동화 계획서
 │   ├── daily/         ← /daily로 만든 배움 기록
-│   └── ideas/         ← /idea로 저장한 아이디어
+│   ├── ideas/         ← /idea로 저장한 아이디어
+│   └── reports/       ← 마크다운 보고서와 조사 문서
 └── .claude/
     ├── commands/      ← 슬래시 커맨드
     ├── skills/        ← 재사용 스킬
@@ -88,6 +89,39 @@ vibe-workspace/
 - 코드를 만들 때는 각 줄에 간단한 주석으로 역할을 설명해줘
 - 뭔가 실패하면 원인을 먼저 설명하고, 해결방법을 알려줘
 - 다음 단계가 뭔지 항상 알려줘
+- 새 프로젝트를 만들 때는 짧은 README로 끝내지 말고, `.claude/references/project-readme-guide.md`를 참고해서 실행 계획서 수준으로 작성해줘
+- 프로젝트 README에는 입력, 출력, 폴더 구조, 만들 기능, 첫 번째 작업, 다음에 Claude에게 요청할 말을 반드시 포함해줘
+- 프로젝트를 만든 뒤 `.claude/references/project-quality-checklist.md`로 빠진 부분이 없는지 확인해줘
+
+---
+
+## 작업 방식
+
+- 바로 코딩하지 말고 먼저 목표와 입력/출력을 확인해줘.
+- 요구가 애매하면 추측하지 말고 질문해줘.
+- 필요한 것만 작게 만들고, 요청받지 않은 기능은 추가하지 마.
+- 기존 파일을 고칠 때는 필요한 부분만 수정해줘.
+- 새 프로젝트나 코드를 만든 뒤에는 실행 방법과 확인 방법을 알려줘.
+- 복잡해지면 더 단순한 방법이 있는지 먼저 설명해줘.
+
+자세한 기준은 `.claude/references/coding-behavior-guide.md`를 참고해줘.
+
+---
+
+## 자동 저장 규칙
+
+학생이 파일 저장 위치를 따로 말하지 않아도, 새 파일은 아래 기준으로 먼저 분류해서 저장해줘.
+
+| 요청 유형 | 저장 위치 | 파일명 규칙 |
+|-----------|-----------|-------------|
+| 마크다운 보고서, 조사 문서, 정리 자료 | `notes/reports/` | `YYYY-MM-DD-짧은-주제.md` |
+| 아이디어 메모 | `notes/ideas/` | `YYYY-MM-DD-짧은-주제.md` |
+| 자동화 계획서, 요구사항 정리 | `notes/tasks/` | `YYYY-MM-DD-짧은-주제.md` |
+| 배움 기록, 회고 | `notes/daily/` | `YYYY-MM-DD.md` |
+| 새 코딩 프로젝트 | `projects/프로젝트이름/` | 프로젝트 폴더 안에 파일 생성 |
+| 완성된 단일 자동화 스크립트 | `scripts/` | `기능이름.py` |
+
+마크다운 보고서를 만들 때는 먼저 `notes/reports/` 폴더가 있는지 확인하고, 없으면 자동으로 만들어줘. 파일을 만든 뒤에는 학생에게 저장된 경로와 VSCode 미리보기 여는 방법만 짧게 알려줘.
 
 ---
 
@@ -101,7 +135,7 @@ API 키는 항상 `.env`에 저장, `.env`는 절대 git에 올리지 마.
 
 ```python
 # ❌ 위험
-api_key = "sk-ant-api03-..."
+api_key = "실제_API_키_문자열"
 
 # ✅ 안전
 import os
@@ -114,5 +148,10 @@ api_key = os.environ.get("ANTHROPIC_API_KEY")
 
 "새 프로젝트 시작할게" 라고 하면:
 1. `projects/프로젝트이름/` 폴더 생성
-2. `projects/프로젝트이름/README.md` 생성
-3. 첫 번째로 뭘 해야 할지 알려줘
+2. `src/`, `input/`, `output/`, `notes/` 폴더 생성
+3. `.claude/references/project-readme-guide.md` 읽기
+4. `projects/프로젝트이름/README.md`를 실행 계획서 수준으로 생성
+5. `.claude/references/project-quality-checklist.md`로 점검
+6. 첫 번째로 뭘 해야 할지 알려줘
+
+README가 너무 짧아지면 안 돼. 학생이 다음 날 다시 열어도 바로 이어서 작업할 수 있어야 해.
