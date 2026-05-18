@@ -13,29 +13,41 @@
 
 ## 실행 순서
 
-### 1단계: 보안 확인 (절대 건너뛰지 마)
+### 1단계: 변경 파일 확인
 
-`git diff --cached`와 `git status`를 확인해서:
-
-- `.env` 파일이 포함되어 있으면 → **즉시 중단**, 어느 파일인지 알려줘
-- 아래 패턴이 코드에 있으면 → **즉시 중단**, 위치를 알려줘:
-  - `sk-ant-`, `sk-proj-` (API 키)
-  - `ANTHROPIC_API_KEY = "sk`
-  - `password = "`
-  - `secret = "`
-
-보안 문제 없으면 → 다음 단계로.
-
----
-
-### 2단계: 변경 내용 파악
+먼저 아래 명령으로 변경된 파일을 확인해:
 
 ```bash
-git status
+git status --short
 git diff --stat
 ```
 
 변경된 파일이 없으면 → "저장할 변경사항이 없어요!" 하고 끝내.
+
+---
+
+### 2단계: 보안 확인 (절대 건너뛰지 마)
+
+`git add .`를 하기 전에 먼저 확인해. 아직 스테이징되지 않은 파일과 새 파일도 검사해야 합니다.
+
+확인 대상:
+
+- `git status --short`에 보이는 모든 변경 파일
+- `git diff`에 보이는 수정 내용
+- 새로 만들어진 파일 중 Git에 아직 추가되지 않은 파일
+
+아래에 해당하면 → **즉시 중단**, 어느 파일인지 알려줘:
+
+- `.env`, `.env.local`, `.env.production` 같은 실제 환경변수 파일
+- 파일명에 `secret`, `credential`, `token`, `password`가 들어간 파일
+- 아래 패턴이 코드나 문서에 들어간 경우:
+  - `sk-ant-`, `sk-proj-` (API 키)
+  - `ANTHROPIC_API_KEY = "sk`
+  - `OPENAI_API_KEY = "sk`
+  - `password = "`
+  - `secret = "`
+
+보안 문제 없으면 → 다음 단계로.
 
 ---
 
@@ -90,9 +102,14 @@ git diff --stat
 
 ```bash
 git add .
+git diff --cached --stat
+git diff --cached -U0
 git commit -m "커밋 메시지"
 git push
 ```
+
+커밋 직전에도 staged diff를 다시 보고, 2단계의 보안 패턴이 들어가 있으면 커밋하지 마.
+pre-commit 보안 훅이 실패하면 오류 내용을 설명하고 중단해.
 
 ---
 
