@@ -12,10 +12,73 @@ Claude Code가 이 파일을 읽고 내 작업 환경을 이해합니다.
 1. `git rev-parse --is-inside-work-tree`로 Git 저장소인지 확인
 2. Git 저장소이면 `git config core.hooksPath .githooks` 실행 (보안 훅 활성화)
 3. Git 저장소가 아니면 훅 설정은 건너뛰기 (`/save` 때 다시 설정)
-4. `.setup-done` 파일 생성
-5. `.claude/commands/start.md`를 읽고 온보딩 시작
+4. Python/Anaconda 실행 경로를 자동 점검하고, 찾은 결과를 로컬 설정 파일에 기록
+5. `.setup-done` 파일 생성
+6. `.claude/commands/start.md`를 읽고 온보딩 시작
 
 있으면 → 바로 사용자 요청을 처리해.
+
+---
+
+## 🤖 자동 실행 원칙 (AI 전용)
+
+학생에게 터미널 명령을 직접 치라고 시키기 전에, Claude가 가능한 범위에서 먼저 `Bash`로 확인하고 실행해줘.
+
+- Git 상태 확인, Python 버전 확인, 폴더 생성, 파일 실행, 패키지 설치 여부 확인은 Claude가 직접 실행
+- 학생에게는 결과와 다음 행동만 쉽게 설명
+- 학생이 직접 해야 하는 일은 로그인, 브라우저 승인, 파일 선택처럼 사람 확인이 필요한 경우로 제한
+- 명령어를 안내할 때도 먼저 Claude가 실행해보고, 실패했을 때만 학생이 따라 할 수 있는 대체 방법을 알려줘
+- 위험한 작업(실제 다운로드 폴더 정리, 대량 파일 이동, 삭제, GitHub push)은 실행 전에 반드시 설명하고 확인을 받아줘
+
+---
+
+## 🐍 Python/Anaconda 경로 자동 점검
+
+Python 실행이 필요할 때 학생에게 바로 "Python을 설치하세요"라고 말하지 마. 먼저 설치된 Python/Anaconda를 직접 찾아줘.
+
+### 우선 확인 순서
+
+1. `python --version`
+2. `py -0p`
+3. `where python`
+4. 흔한 Anaconda 경로 확인:
+   - `C:\ProgramData\anaconda3\python.exe`
+   - `%USERPROFILE%\anaconda3\python.exe`
+   - `%USERPROFILE%\miniconda3\python.exe`
+   - `%LOCALAPPDATA%\Programs\Python\Python*\python.exe`
+
+설치된 Python을 찾으면:
+
+1. 그 경로로 `--version`을 실행해서 실제 작동 여부 확인
+2. `.claude/local-python.json`에 아래처럼 저장
+
+```json
+{
+  "python": "찾은_python.exe_전체경로",
+  "checked_at": "YYYY-MM-DD",
+  "note": "이 파일은 학생 PC별 로컬 설정입니다. GitHub에 올리지 않습니다."
+}
+```
+
+3. 앞으로 Python 스크립트 실행은 저장된 경로를 우선 사용
+4. 학생에게는 "이미 설치된 Python을 찾아 연결했어요" 정도로만 짧게 설명
+
+정말 아무 Python도 찾지 못했을 때만 Anaconda 설치를 안내해.
+
+---
+
+## 🧠 AI/API 사용 원칙 (AI 전용)
+
+기본 실습에서는 학생에게 Anthropic/OpenAI/Gemini API 키 발급을 권하지 마.
+
+- 요약, 분류, 보고서 작성, 문장 생성 같은 AI 작업은 Claude Code의 현재 로그인 세션에서 처리
+- Python 스크립트에는 API 호출 코드를 넣지 말고, 로컬 파일 처리/텍스트 추출/CSV 정리/폴더 정리까지만 맡겨
+- 예: PDF 요약은 Python으로 텍스트를 추출한 뒤 Claude가 `Read`로 읽고 요약
+- 예: 웹 요약은 Python으로 HTML/텍스트를 저장한 뒤 Claude가 로컬 파일을 읽고 요약
+- 계획을 세울 때도 "API 키 발급 → SDK 호출" 흐름을 기본안으로 제안하지 마
+- 학생이 명시적으로 "외부 API를 쓰는 앱을 만들고 싶다"고 말할 때만 API 방식의 비용, 키 관리, 보안 위험을 설명하고 확인을 받아
+
+학생에게는 내부 인증 방식이나 OAuth 같은 표현을 자세히 설명하지 말고, "Claude Code 안에서 처리하겠습니다" 정도로 말해.
 
 ---
 
@@ -105,6 +168,8 @@ vibe-workspace/
 - 기존 파일을 고칠 때는 필요한 부분만 수정해줘.
 - 새 프로젝트나 코드를 만든 뒤에는 실행 방법과 확인 방법을 알려줘.
 - 복잡해지면 더 단순한 방법이 있는지 먼저 설명해줘.
+- 학생에게 터미널 명령을 직접 시키기보다, Claude가 먼저 실행하고 결과를 쉽게 설명해줘.
+- 자동화 설계는 로컬 파일 처리와 Claude Code 세션 처리를 우선하고, API 키가 필요한 구조는 기본으로 제안하지 마.
 
 자세한 기준은 `.claude/references/coding-behavior-guide.md`를 참고해줘.
 
@@ -133,17 +198,18 @@ vibe-workspace/
 
 Git 커밋 전에 반드시 확인:
 1. `.env` 파일이 스테이징에 포함되어 있지 않은지
-2. 코드에 API 키 패턴이 없는지 (`sk-ant-`, `sk-proj-`, `API_KEY =`, `password =`)
+2. 코드에 API 키 패턴이 없는지 (`sk-ant-`, `sk-proj-`, `API_KEY =`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, `password =`)
 
-API 키는 항상 `.env`에 저장, `.env`는 절대 git에 올리지 마.
+기본 실습에서는 API 키를 새로 만들거나 코드에 넣지 마.  
+학생이 명시적으로 API 앱을 원할 때만 `.env` 사용법을 설명하고, `.env`는 절대 git에 올리지 마.
 
 ```python
 # ❌ 위험
 api_key = "실제_API_키_문자열"
 
-# ✅ 안전
-import os
-api_key = os.environ.get("ANTHROPIC_API_KEY")
+# ✅ 기본 실습 권장
+# Python은 로컬 파일 처리만 하고,
+# 요약/분석은 Claude Code가 현재 세션에서 직접 처리합니다.
 ```
 
 ---

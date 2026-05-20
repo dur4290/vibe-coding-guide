@@ -18,6 +18,8 @@ secrets.json
 
 # Claude Code 설정 (개인 인증 정보 포함)
 .claude/settings.local.json
+.claude/local-python.json
+.python-path
 
 # ============================================================
 # Python

@@ -13,15 +13,24 @@
 
 ## 실행 순서
 
+## 공통 실행 원칙
+
+- 학생에게 Git 명령어를 직접 입력하라고 시키지 마.
+- `git status`, `git diff`, `git add`, `git commit`, `git push`, `git config`는 Claude가 직접 실행해.
+- 학생에게는 원격 저장소 주소 입력, 커밋 메시지 승인, GitHub 로그인/브라우저 인증 승인처럼 사람 확인이 필요한 것만 요청해.
+- 오류가 나면 Claude가 먼저 원인을 확인하고 해결 가능한 명령을 실행해. 그래도 사람 조치가 필요할 때만 학생에게 짧게 안내해.
+
+---
+
 ### 0단계: Git 저장소 연결 확인
 
-먼저 현재 폴더가 Git 저장소인지 확인해:
+먼저 Claude가 직접 현재 폴더가 Git 저장소인지 확인해:
 
 ```bash
 git rev-parse --is-inside-work-tree
 ```
 
-실패하면 아직 Git 저장소가 아니야. 사용자에게 GitHub 저장소 주소를 물어봐:
+실패하면 아직 Git 저장소가 아니야. Git 명령어를 학생에게 시키지 말고, 사용자에게 GitHub 저장소 주소만 물어봐:
 
 ```
 아직 이 폴더가 Git 저장소로 연결되어 있지 않아요.
@@ -29,7 +38,7 @@ GitHub에서 빈 저장소를 만든 뒤 주소를 알려주세요.
 예: https://github.com/아이디/first-vibe-coding.git
 ```
 
-주소를 받으면 아래 순서로 연결해:
+주소를 받으면 Claude가 아래 순서로 직접 연결해:
 
 ```bash
 git init
@@ -44,7 +53,7 @@ git config core.hooksPath .githooks
 git remote -v
 ```
 
-결과가 비어 있는지 확인하고, 비어 있으면 사용자에게 GitHub 저장소 주소를 받아 `git remote add origin 받은_저장소_주소`를 실행해.
+결과가 비어 있는지 Claude가 확인하고, 비어 있으면 사용자에게 GitHub 저장소 주소를 받아 `git remote add origin 받은_저장소_주소`를 직접 실행해.
 
 remote origin이 이미 있지만 `github.com/dur4290/vibe-coding-guide`를 가리키면 학생 개인 저장소가 아니라 배포용 원본 저장소야. 이때는 사용자에게 본인 저장소 주소를 받아 아래처럼 바꿔:
 
@@ -59,7 +68,7 @@ Git 저장소 연결이 끝나면 `.githooks` 폴더가 있는지 확인하고, 
 
 ### 1단계: 변경 파일 확인
 
-먼저 아래 명령으로 변경된 파일을 확인해:
+먼저 Claude가 아래 명령으로 변경된 파일을 확인해:
 
 ```bash
 git status --short
@@ -122,7 +131,7 @@ git diff --stat
 
 ### 4단계: 사용자 확인
 
-제안한 메시지를 보여주고 확인 받아:
+제안한 메시지를 보여주고 확인 받아. 확인 전에는 커밋하지 마:
 
 ```
 📝 이 메시지로 저장할까요?
@@ -194,3 +203,4 @@ git push -u origin main
 - 보안 확인은 절대 건너뛰지 마
 - 사용자 확인 없이 커밋하지 마
 - 한 번에 너무 많은 파일 변경이 있으면 주제별로 나눠서 커밋할지 물어봐
+- Git 명령어를 학생에게 복사해서 실행하라고 하지 마. Claude가 직접 실행하고 결과만 설명해

@@ -100,7 +100,8 @@ def extract_tables(pdf_path, output_csv):
 
 ## PDF 내용 요약 방법
 
-텍스트를 추출한 뒤, Claude Code에 붙여넣으면 요약해드립니다:
+텍스트를 추출한 뒤, Claude Code가 로컬 파일을 읽고 요약합니다.  
+API 키를 발급받거나 API 호출 코드를 만들지 마세요.
 
 1. 위 코드로 텍스트 추출 → `.txt` 파일 생성
 2. Claude Code에: "이 파일 읽고 요약해줘" → `Read` 도구로 읽고 요약
@@ -119,3 +120,4 @@ def extract_tables(pdf_path, output_csv):
 - 스캔된 PDF(이미지로 만든 PDF)는 텍스트 추출이 안 될 수 있어요
 - 한글 PDF는 인코딩 문제가 생길 수 있으니, `utf-8`로 저장할 때 문제가 생기면 알려줘요
 - 매우 큰 PDF(100페이지 이상)는 시간이 걸릴 수 있어요
+- 요약 기능 때문에 Anthropic/OpenAI/Gemini API 키 발급을 안내하지 마세요. 기본 실습에서는 Claude Code의 현재 세션에서 요약합니다
