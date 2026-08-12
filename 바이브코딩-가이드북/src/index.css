@@ -1,0 +1,56 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Pretendard Variable", "Pretendard", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Pretendard Variable", "Pretendard", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Pretendard Variable", "Pretendard", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+
+  /* Sleek Interface Color Palette */
+  --color-sleek-bg: #F8FAFC;
+  --color-sleek-sidebar: #F1F5F9;
+  --color-sleek-teal: #0F172A;
+  --color-sleek-border: #E2E8F0;
+  --color-sleek-border-light: #F1F5F9;
+  --color-sleek-text: #0F172A;
+  --color-sleek-muted: #475569;
+  --color-sleek-subtle: #64748B;
+  --color-sleek-blue: #3B82F6;
+  --color-sleek-green: #10B981;
+}
+
+/* Notebook styling accents */
+@layer base {
+  html,
+  body,
+  button,
+  input,
+  textarea,
+  select,
+  code,
+  pre {
+    font-family: "Pretendard Variable", "Pretendard", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  body {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom ink scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.2);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.4);
+}

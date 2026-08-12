@@ -3,6 +3,7 @@
     "defaultMode": "default",
     "allow": [
       "Bash(git status)",
+      "Bash(git config*)",
       "Bash(git diff*)",
       "Bash(git add*)",
       "Bash(git commit*)",

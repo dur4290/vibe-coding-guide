@@ -78,7 +78,7 @@ def main():
 
     print()
     c("🎉 설정 완료! 이제 VSCode에서 이 폴더를 열고", "cyan")
-    c("   터미널에서 'claude'를 입력해서 시작하세요.", "cyan")
+    c("   왼쪽 사이드바의 Claude 패널에서 /start를 입력하세요.", "cyan")
     print()
 
 

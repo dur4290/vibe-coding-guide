@@ -1,0 +1,6 @@
+{
+  "name": "바이브코딩 가이드북",
+  "description": "코딩을 거의 모르는 데이터과학과 학생들을 위한, 종이 가이드북 감성의 인터랙티브 바이브코딩 학습 가이드",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

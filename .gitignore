@@ -3,6 +3,7 @@
 # ============================================================
 .env
 .env.*
+!.env.example
 .env.local
 .env.production
 *.key
@@ -72,3 +73,8 @@ data/private/
 *.tmp
 *.temp
 .cache/
+
+# 로컬 배포/작업용 Git 복제본
+guide-site/
+site-repo/
+vibe-workspace/

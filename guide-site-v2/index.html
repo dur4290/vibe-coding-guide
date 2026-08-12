@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브코딩 준비 가이드 · 챕터 선택</title>
+<style>
+
+:root{
+  --bg:#f6f7fb; --panel:#ffffff; --panel2:#eef3ff; --ink:#172033; --heading:#0f172a; --muted:#5c6475;
+  --line:#d7deef; --accent:#315ed8; --accent2:#047c68; --warn:#9a6410; --bad:#b42336; --good:#177245;
+  --chip:#e9efff; --soft-accent:#f2f6ff; --soft-warn:#fff8e6; --soft-bad:#fff1f3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  line-height:1.72; font-size:16px; overflow-x:hidden;
+}
+a{color:var(--accent);text-decoration:none}
+main{flex:1; min-width:0; max-width:1040px; padding:32px 34px 96px}
+header.hero{margin-bottom:30px}
+header.hero .tag{display:inline-block; background:var(--chip); color:var(--accent2); padding:4px 12px; border-radius:999px; font-size:13px; font-weight:700}
+header.hero h1{font-size:30px; margin:14px 0 6px; line-height:1.32; color:var(--heading)}
+header.hero p{color:var(--muted); margin:0}
+.lead{color:var(--muted); font-size:17px}
+.top-summary{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin:22px 0 10px}
+.top-summary a{display:block; min-height:128px; padding:18px; border:1px solid var(--line); background:var(--panel); border-radius:12px; color:var(--ink); transition:.15s; overflow-wrap:anywhere}
+.top-summary a:hover{transform:translateY(-2px); border-color:#9bb4f4; background:var(--soft-accent)}
+.top-summary b{display:block; color:var(--accent2); font-size:13px; margin-bottom:4px}
+.top-summary span{display:block; color:var(--muted); font-size:14px; line-height:1.5}
+.top-summary em{display:block; margin-top:12px; color:var(--accent); font-style:normal; font-size:13px; font-weight:700}
+.index-main{max-width:1040px; margin:0 auto; padding-top:44px}
+.box{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.box.accent{border-color:#9bb4f4; background:var(--soft-accent)}
+.box b{color:var(--heading)}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:30px;border-top:1px solid var(--line);margin-top:40px}
+@media(max-width:860px){main{max-width:none; padding:24px 18px 80px}.top-summary{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.top-summary{grid-template-columns:1fr} header.hero h1{font-size:27px}}
+
+</style>
+</head>
+<body>
+<main class="index-main">
+<header class="hero">
+<span class="tag">바이브코딩 · 준비편</span>
+<h1>바이브코딩 준비 가이드</h1>
+<p>VSCode · Anaconda · GitHub 워크스페이스 받기</p>
+</header>
+
+<p class="lead">바이브코딩 실습을 시작하기 전에 필요한 도구를 설치하고 학생 워크스페이스를 내려받는 단계만 다룹니다. Windows 사용자 기준이고, 코딩이 처음이어도 따라할 수 있습니다.</p>
+
+<div class="box accent">
+<b>📌 챕터별 진행 순서</b>
+<p style="margin:8px 0 0">Ch1 → (Python 없는 사람만 Ch2) → Ch3 순서로 진행하세요. Ch1 끝에서 본인이 Ch2로 가야 하는지 알려줍니다.</p>
+</div>
+
+<div class="top-summary">
+<a href="guide.html#ch1"><b>Ch1</b><span>VSCode 설치 — 공식 사이트 접속, 설치, Python 설치 여부 확인</span><em>열기</em></a>
+<a href="guide.html#ch2"><b>Ch2 · 선택</b><span>Anaconda 설치 — Python이 없는 분만. Skip Registration, 64-Bit Graphical Installer</span><em>열기</em></a>
+<a href="guide.html#ch3"><b>Ch3</b><span>GitHub에서 학생 워크스페이스 다운로드 — Download ZIP으로 받아 VSCode로 열기</span><em>열기</em></a>
+</div>
+
+</main>
+<footer>바이브코딩 준비 가이드 · VSCode · Anaconda · GitHub 워크스페이스 다운로드</footer>
+</body>
+</html>

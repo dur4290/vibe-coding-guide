@@ -60,5 +60,5 @@ ANTHROPIC_API_KEY=여기에_실제_API_키를_입력하세요
 
 Write-Host ""
 Write-Host "🎉 설정 완료! 이제 VSCode에서 이 폴더를 열고" -ForegroundColor Cyan
-Write-Host "   터미널에서 'claude'를 입력해서 시작하세요." -ForegroundColor Cyan
+Write-Host "   왼쪽 사이드바의 Claude 패널에서 /start를 입력하세요." -ForegroundColor Cyan
 Write-Host ""

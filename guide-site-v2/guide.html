@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브코딩 준비 가이드 · VSCode · Anaconda · GitHub</title>
+<style>
+
+:root{
+  --bg:#f6f7fb; --panel:#ffffff; --panel2:#eef3ff; --ink:#172033; --heading:#0f172a; --muted:#5c6475;
+  --line:#d7deef; --accent:#315ed8; --accent2:#047c68; --warn:#9a6410; --bad:#b42336; --good:#177245;
+  --chip:#e9efff; --soft-accent:#f2f6ff; --soft-warn:#fff8e6; --soft-bad:#fff1f3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  line-height:1.72; font-size:16px; overflow-x:hidden;
+}
+a{color:var(--accent);text-decoration:none}
+.layout{display:flex; width:100%; max-width:none; margin:0; gap:0;}
+nav{
+  position:sticky; top:0; align-self:flex-start; width:248px; min-width:248px; height:100vh;
+  overflow-y:auto; padding:22px 16px; border-right:1px solid var(--line); background:#f9fbff;
+}
+nav h2{font-size:15px; color:var(--accent2); margin:18px 0 8px; letter-spacing:.2px}
+nav h2:first-child{margin-top:0}
+nav a{display:block; color:var(--muted); padding:6px 10px; border-radius:8px; font-size:14px; transition:.15s; overflow-wrap:anywhere}
+nav a:hover{background:var(--panel2); color:var(--heading)}
+nav .ch{font-weight:700; color:var(--heading); margin-top:14px; font-size:13px; text-transform:uppercase; opacity:.72}
+main{flex:1; min-width:0; max-width:1040px; padding:32px 34px 96px}
+header.hero{margin-bottom:30px}
+header.hero .tag{display:inline-block; background:var(--chip); color:var(--accent2); padding:4px 12px; border-radius:999px; font-size:13px; font-weight:700}
+header.hero h1{font-size:30px; margin:14px 0 6px; line-height:1.32; color:var(--heading)}
+header.hero p{color:var(--muted); margin:0}
+section{margin:48px 0; scroll-margin-top:20px}
+section.session{border-top:2px dashed var(--line); padding-top:34px}
+section.session:first-of-type{border-top:0; padding-top:0}
+h2.sec{font-size:25px; margin:0 0 6px; color:var(--heading)}
+h2.sec .num{color:var(--accent); font-weight:800; margin-right:8px}
+h2.topic{font-size:22px; margin:38px 0 10px; color:var(--heading); border-left:4px solid var(--accent); padding-left:12px; scroll-margin-top:20px}
+h3{font-size:19px; margin:30px 0 10px; color:var(--heading)}
+h4{font-size:17px; margin:22px 0 8px; color:var(--accent2)}
+p{margin:10px 0}
+strong{color:var(--heading)}
+ul,ol{padding-left:24px}
+li{margin:4px 0}
+.lead{color:var(--muted); font-size:17px}
+.box{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.box.accent{border-color:#9bb4f4; background:var(--soft-accent)}
+.box .t{font-weight:700; color:var(--heading); font-size:14px; display:block; margin-bottom:4px}
+.question{background:var(--soft-accent); border:1px solid #90aaf0; border-radius:12px; padding:16px 18px; margin:16px 0}
+.question .t{color:var(--accent); font-weight:700; font-size:14px; display:block; margin-bottom:4px}
+.keypoint{background:var(--soft-warn); border:1px solid #ead18a; border-radius:12px; padding:16px 18px; margin:18px 0}
+.keypoint .t{color:var(--warn); font-weight:700; font-size:14px; display:block; margin-bottom:4px}
+.warn{background:var(--soft-bad); border:1px solid #f0b8c0; border-radius:12px; padding:16px 18px; margin:16px 0}
+.warn .t{color:var(--bad); font-weight:700; font-size:14px; display:block; margin-bottom:4px}
+.good{background:#eefaf7; border:1px solid #9fd4c5; border-radius:12px; padding:16px 18px; margin:16px 0}
+.good .t{color:var(--good); font-weight:700; font-size:14px; display:block; margin-bottom:4px}
+.muted{color:var(--muted)}
+code{background:#f0f4ff; border:1px solid var(--line); border-radius:6px; padding:2px 7px; font-family:'JetBrains Mono',Consolas,monospace; font-size:.92em; color:#123c91; overflow-wrap:anywhere; word-break:break-word; white-space:normal}
+pre{background:#f8faff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow-x:hidden; margin:16px 0; white-space:pre-wrap; overflow-wrap:anywhere}
+pre code{display:block; background:transparent; border:0; padding:0; color:#172033; font-size:13.5px; line-height:1.62; white-space:pre-wrap; overflow-wrap:anywhere; word-break:break-word}
+blockquote{margin:16px 0; padding:14px 18px; border-left:4px solid var(--accent2); background:#eefaf7; color:var(--ink); border-radius:0 12px 12px 0}
+img{max-width:100%; height:auto}
+.figure{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; margin:18px 0}
+.figure img{display:block; margin:0 auto; border-radius:8px; background:#fff}
+.figure .cap{display:block; margin-top:8px; color:var(--muted); font-size:13px; text-align:center}
+.figure-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin:18px 0}
+.figure-grid .figure{margin:0}
+.back-link{display:block; margin:0 0 18px; color:var(--accent2); font-weight:700}
+.session-nav{display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 6px}
+.session-nav a{display:inline-block; background:var(--chip); border:1px solid var(--line); border-radius:8px; padding:6px 11px; color:var(--ink); font-size:14px}
+.session-nav a.current{border-color:var(--accent2); color:var(--accent2); background:#eefaf7}
+.step{margin:24px 0}
+.step .why{color:var(--muted); margin:6px 0 10px}
+.duration{display:inline-block; background:var(--chip); color:var(--accent2); padding:2px 10px; border-radius:999px; font-size:12.5px; font-weight:700; margin-left:8px; vertical-align:middle}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:30px;border-top:1px solid var(--line);margin-top:40px}
+@media(max-width:1180px){nav{width:232px; min-width:232px} main{padding:28px 26px 88px}}
+@media(max-width:860px){.layout{display:block} nav{display:none} main{max-width:none; padding:24px 18px 80px}}
+@media(max-width:560px){header.hero h1{font-size:27px} h2.sec{font-size:23px} h2.topic{font-size:20px} pre code{font-size:13px}}
+
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+<h2>바이브코딩 준비 가이드</h2>
+<a class="back-link" href="index.html">&larr; 챕터 선택</a>
+
+<div class="ch">Ch1. VSCode 설치</div>
+<a href="#ch1">개요</a>
+<a href="#ch1-s1">1. 공식 사이트 접속</a>
+<a href="#ch1-s2">2. 설치 파일 실행</a>
+<a href="#ch1-s3">3. Python 설치 확인</a>
+<a href="#ch1-branch">→ 다음 챕터 분기</a>
+
+<div class="ch">Ch2. Anaconda (선택)</div>
+<a href="#ch2">개요 (Python 없는 분만)</a>
+<a href="#ch2-s1">1. 다운로드 페이지</a>
+<a href="#ch2-s2">2. 설치 진행</a>
+<a href="#ch2-s3">3. VSCode 재확인</a>
+
+<div class="ch">Ch3. 워크스페이스 받기</div>
+<a href="#ch3">개요</a>
+<a href="#ch3-s1">1. 저장소 열기</a>
+<a href="#ch3-s2">2. Download ZIP</a>
+<a href="#ch3-s3">3. 압축 해제</a>
+<a href="#ch3-s4">4. VSCode에서 열기</a>
+</nav>
+
+<main>
+<header class="hero">
+<span class="tag">바이브코딩 · 준비편</span>
+<h1>바이브코딩 준비 가이드</h1>
+<p>VSCode 설치 → (Python 없으면 Anaconda) → GitHub에서 학생 워크스페이스 받기</p>
+</header>
+
+<p class="lead">실습 환경을 만드는 단계만 모았습니다. Ch1을 끝내고 본인이 Ch2로 가야 하는지 Ch3로 바로 가도 되는지 안내해줍니다.</p>
+
+<!-- ========================= Ch1 ========================= -->
+<section class="session" id="ch1">
+<h2 class="sec"><span class="num">Ch1</span>VSCode 설치<span class="duration">5~10분</span></h2>
+<p class="muted">VSCode는 코드를 작성하는 편집기입니다. 마이크로소프트에서 만든 무료 프로그램입니다.</p>
+
+<div class="step" id="ch1-s1">
+<h3>1. VSCode 공식 사이트 접속</h3>
+<p class="why">앞으로 모든 실습은 VSCode 안에서 진행하므로 먼저 편집기를 받아야 합니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+브라우저에서 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a> 에 접속하고 <strong>Download for Windows</strong> 버튼을 클릭하세요.
+</div>
+
+<div class="figure">
+<img src="screenshots/ch1/step-1.png" alt="VSCode 공식 사이트 메인 화면 — Download for Windows 버튼">
+<span class="cap">VSCode 공식 사이트 메인 화면. 사이트가 자동으로 Windows용 버튼을 보여줍니다.</span>
+</div>
+
+<div class="good"><span class="t">확인 방법</span>다운로드 폴더에 <code>VSCodeUserSetup-x64-xxx.exe</code> 같은 설치 파일이 저장되면 성공입니다.</div>
+</div>
+
+<div class="step" id="ch1-s2">
+<h3>2. 설치 파일 실행</h3>
+<p class="why">다운로드한 설치 파일을 실행해서 VSCode를 컴퓨터에 설치합니다. 대부분 "다음"만 누르면 되지만, 중간 한 화면에서 옵션 체크 상태를 꼭 확인해야 합니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+다운로드 폴더의 <code>VSCodeUserSetup-xxx.exe</code> 파일을 더블클릭해서 설치 마법사를 시작하세요.
+</div>
+
+<h4>설치 마법사 화면 순서</h4>
+<ol>
+<li><strong>사용권 계약</strong> — "동의함" 선택 후 다음.</li>
+<li><strong>설치 위치 선택</strong> — 기본값 그대로 두고 다음.</li>
+<li><strong>시작 메뉴 폴더 선택</strong> — 기본값 그대로 두고 다음.</li>
+<li><strong>추가 작업 선택</strong> — 이 화면이 중요합니다. 아래 표대로 체크하세요.</li>
+<li><strong>설치 준비 완료</strong> — "설치" 버튼 클릭.</li>
+<li><strong>설치 완료</strong> — "Visual Studio Code 실행" 체크 후 마침.</li>
+</ol>
+
+<div class="figure">
+<img src="screenshots/ch1/step-2.png" alt="VSCode 설치 마법사 — 추가 작업 선택 화면">
+<span class="cap">"추가 작업 선택" 화면. 아래 표대로 체크박스 상태를 맞춰주세요.</span>
+</div>
+
+<h4>"추가 작업 선택" 화면 — 체크박스 5개 안내</h4>
+<div class="box">
+<ul style="margin:0">
+<li>☑ <strong>바탕 화면에 바로가기 만들기</strong> — <span class="muted">체크 추천. 바탕화면에서 바로 VSCode를 열 수 있어 편합니다.</span></li>
+<li>☑ <strong>"Code(으)로 열기" 작업을 Windows 탐색기 <u>파일</u>의 상황에 맞는 메뉴에 추가</strong> — <span class="muted">체크 추천. 파일을 우클릭해 바로 VSCode로 열 수 있습니다.</span></li>
+<li>☑ <strong>"Code(으)로 열기" 작업을 Windows 탐색기 <u>디렉터리</u>의 상황에 맞는 메뉴에 추가</strong> — <span class="muted">⭐ 강력 추천. 폴더를 우클릭해 그 폴더를 통째로 VSCode로 열 수 있습니다. Ch3에서 워크스페이스를 열 때 가장 편한 방법입니다.</span></li>
+<li>☑ <strong>Code을(를) 지원되는 파일 형식에 대한 편집기로 등록합니다</strong> — <span class="muted">기본 체크. 그대로 두세요.</span></li>
+<li>☑ <strong>PATH에 추가(다시 시작한 후 사용 가능)</strong> — <span class="muted">⭐ 필수. 기본 체크되어 있지만, 풀려 있다면 꼭 체크하세요. 터미널에서 <code>code</code> 명령어를 쓸 수 있게 해줍니다.</span></li>
+</ul>
+</div>
+
+<div class="keypoint">
+<span class="t">정리 — 5개 모두 체크 권장</span>
+초보자는 다섯 박스를 모두 체크하는 편이 가장 편합니다. 특히 ⭐ 표시한 두 개(<strong>디렉터리 메뉴 추가</strong>, <strong>PATH에 추가</strong>)는 꼭 체크하세요.
+</div>
+
+<div class="warn">
+<span class="t">주의 — 설치 후 재시작</span>
+"PATH에 추가" 옵션은 설명에 적힌 대로 <strong>시스템(또는 VSCode)을 한 번 재시작한 후</strong>부터 적용됩니다. Ch1 마지막 단계의 <code>python --version</code> 확인이 잘 안 되면 VSCode를 완전히 닫았다가 다시 열어보세요.
+</div>
+
+<div class="good"><span class="t">확인 방법</span>설치 완료 후 VSCode가 정상 실행되어 환영(Welcome) 화면이 보이면 다음 단계로 갑니다.</div>
+</div>
+
+<div class="step" id="ch1-s3">
+<h3>3. Python이 이미 설치되어 있는지 확인</h3>
+<p class="why">Python은 자동화 스크립트에 쓰는 프로그래밍 언어입니다. 데이터과학과 비즈니스프로그래밍1을 들었다면 이미 Anaconda 또는 Python이 설치되어 있을 가능성이 높습니다. 있으면 Ch2를 건너뛰어도 됩니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+VSCode에서 상단 메뉴 <strong>Terminal → New Terminal</strong>(또는 <code>Ctrl + `</code>)을 열고 아래 명령을 입력하세요.
+<pre><code>python --version</code></pre>
+</div>
+
+<div class="figure">
+<img src="screenshots/ch1/step-4.png" alt="VSCode 터미널에서 python --version 실행 결과">
+<span class="cap">터미널에 <code>python --version</code>을 입력했을 때 버전이 나오는 모습.</span>
+</div>
+
+<div class="warn">
+<span class="t">주의 — "Python"만 나오는 경우</span>
+<code>Python</code> 글자만 나오고 버전 번호가 안 보이면, Windows의 "앱 실행 별칭"이 잡힌 상태일 수 있습니다. 이 경우는 아직 실제 Python이 설치된 게 아니므로 <strong>Ch2 Anaconda 설치</strong>로 가세요.
+</div>
+
+<div class="box" id="ch1-branch" style="border-color:#9bb4f4;background:var(--soft-accent)">
+<span class="t">📍 다음으로 어디 갈까요?</span>
+<ul>
+<li><strong>버전 번호가 정상 출력됨</strong> (예: <code>Python 3.11.5</code>) → <a href="#ch3">Ch3. 워크스페이스 받기</a>로 바로 가세요.</li>
+<li><strong>버전이 안 나오거나 오류 메시지</strong> → <a href="#ch2">Ch2. Anaconda 설치</a>로 가세요.</li>
+</ul>
+</div>
+
+<div class="session-nav">
+<a href="#ch1" class="current">Ch1</a>
+<a href="#ch2">Ch2 (선택)</a>
+<a href="#ch3">Ch3</a>
+</div>
+</div>
+</section>
+
+<!-- ========================= Ch2 ========================= -->
+<section class="session" id="ch2">
+<h2 class="sec"><span class="num">Ch2</span>Anaconda 설치<span class="duration">10~15분</span></h2>
+
+<div class="keypoint">
+<span class="t">⚠️ 이 챕터는 Python이 없는 분만</span>
+Ch1의 마지막에 <code>python --version</code>으로 버전이 정상 출력됐다면 이 챕터는 건너뛰고 <a href="#ch3">Ch3</a>로 바로 가세요. Anaconda는 Python을 포함한 데이터과학용 통합 환경입니다.
+</div>
+
+<div class="step" id="ch2-s1">
+<h3>1. Anaconda 다운로드 페이지</h3>
+<p class="why">Anaconda 공식 사이트에서 Windows용 그래픽 설치 파일을 받습니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+<a href="https://www.anaconda.com/download" target="_blank" rel="noopener">anaconda.com/download</a>에 접속하세요.
+<ul>
+<li>가입 화면이 뜨면 <strong>Skip Registration</strong>(아래쪽에 작게 있음)을 누르세요. 회원가입 안 해도 됩니다.</li>
+<li>다음 화면에서 <strong>Anaconda Distribution</strong>의 <strong>Windows 64-Bit Graphical Installer</strong>를 선택하세요. (Miniconda 아닙니다.)</li>
+</ul>
+</div>
+
+<div class="figure">
+<img src="screenshots/ch1/step-5.png" alt="Anaconda Distribution의 Windows 64-Bit Graphical Installer 선택 화면">
+<span class="cap">Anaconda 다운로드 페이지. 64-Bit Graphical Installer를 선택하세요.</span>
+</div>
+
+<div class="good"><span class="t">확인 방법</span>다운로드 폴더에 <code>Anaconda3-xxx-Windows-x86_64.exe</code> 파일이 저장되면 성공입니다.</div>
+</div>
+
+<div class="step" id="ch2-s2">
+<h3>2. 설치 진행 — 옵션 두 개 꼭 체크</h3>
+<p class="why">설치 마법사를 따라 진행하되, 옵션 화면에서 두 개를 체크해야 VSCode와 PowerShell에서 Python을 잘 찾습니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+다운로드한 <code>Anaconda3-xxx.exe</code>를 실행하고 Next로 진행하세요. 중간에 옵션 화면이 나오면 아래 둘 다 체크합니다.
+<ul>
+<li><strong>Add Anaconda3 to my PATH environment variable</strong></li>
+<li><strong>Register Anaconda3 as my default Python</strong></li>
+</ul>
+</div>
+
+<div class="figure-grid">
+<div class="figure">
+<img src="screenshots/ch1/anaconda-install-12.png" alt="Anaconda 설치 1-2단계">
+<span class="cap">1-2단계 — 라이선스 동의 / 사용자 선택</span>
+</div>
+<div class="figure">
+<img src="screenshots/ch1/anaconda-install-34.png" alt="Anaconda 설치 3-4단계">
+<span class="cap">3-4단계 — 설치 경로 / 옵션 선택 (두 개 체크!)</span>
+</div>
+<div class="figure">
+<img src="screenshots/ch1/anaconda-install-56.png" alt="Anaconda 설치 5-6단계">
+<span class="cap">5-6단계 — 설치 진행 / 완료</span>
+</div>
+</div>
+
+<div class="warn">
+<span class="t">주의 — PATH 옵션에 빨간 글씨 경고</span>
+"Add to PATH" 옵션을 체크하면 빨간 글씨로 권장하지 않는다는 경고가 뜨지만, 우리 수업에서는 VSCode 터미널에서 바로 쓰기 위해 체크합니다.
+</div>
+
+<div class="good"><span class="t">확인 방법</span>설치 완료 화면이 나오고 Anaconda 관련 추가 안내(Tutorials, Documentation 등) 페이지가 열리면 성공입니다.</div>
+</div>
+
+<div class="step" id="ch2-s3">
+<h3>3. VSCode 재시작 후 Python 다시 확인</h3>
+<p class="why">설치 후에는 VSCode가 새 PATH 설정을 읽도록 한 번 다시 시작해야 합니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+<ol>
+<li>VSCode를 완전히 종료한 뒤 다시 엽니다.</li>
+<li>Terminal → New Terminal을 열고 다시 입력합니다.</li>
+</ol>
+<pre><code>python --version</code></pre>
+</div>
+
+<div class="figure">
+<img src="screenshots/ch1/step-4.png" alt="VSCode 터미널에서 python --version 정상 출력">
+<span class="cap"><code>Python 3.x.x</code>처럼 버전이 나오면 성공입니다.</span>
+</div>
+
+<div class="warn">
+<span class="t">그래도 버전이 안 보이면</span>
+<strong>Ctrl + Shift + P</strong>를 누르고 <code>Python: Select Interpreter</code>를 검색해 실행한 뒤, Anaconda Python을 선택하세요. 일반적인 경로는 <code>C:\ProgramData\anaconda3\python.exe</code>입니다.
+</div>
+
+<div class="good"><span class="t">확인 방법</span><code>Python 3.x.x</code>처럼 버전 번호가 정상 출력되면 Ch2 완료입니다.</div>
+
+<div class="session-nav">
+<a href="#ch1">Ch1</a>
+<a href="#ch2" class="current">Ch2 (선택)</a>
+<a href="#ch3">Ch3</a>
+</div>
+</div>
+</section>
+
+<!-- ========================= Ch3 ========================= -->
+<section class="session" id="ch3">
+<h2 class="sec"><span class="num">Ch3</span>GitHub에서 학생 워크스페이스 받기<span class="duration">10~15분</span></h2>
+<p class="muted">학생 배포용 저장소를 ZIP으로 내려받고 VSCode에서 폴더로 여는 단계입니다.</p>
+
+<div class="step" id="ch3-s1">
+<h3>1. 학생 배포용 저장소 열기</h3>
+<p class="why">GitHub의 저장소 페이지에서 워크스페이스 전체를 한 번에 받을 수 있습니다. <strong>가입은 안 해도 됩니다.</strong></p>
+
+<div class="box">
+<span class="t">할 일</span>
+브라우저에서 아래 학생 배포용 저장소 링크를 여세요.<br>
+<a href="https://github.com/dur4290/BAI-workspace" target="_blank" rel="noopener">https://github.com/dur4290/BAI-workspace</a>
+</div>
+
+<div class="figure">
+<img src="screenshots/ch3/github-download.png" alt="BAI-workspace 저장소 화면과 Code 메뉴">
+<span class="cap">학생 배포용 워크스페이스 저장소(BAI-workspace) 화면. 다음 단계에서 우상단의 초록색 Code 버튼을 누릅니다.</span>
+</div>
+
+<div class="good"><span class="t">확인 방법</span>GitHub 저장소 화면에 파일/폴더 목록이 보이면 다음 단계로 갑니다.</div>
+</div>
+
+<div class="step" id="ch3-s2">
+<h3>2. Download ZIP으로 내려받기</h3>
+<p class="why">처음에는 복잡한 git clone 대신 ZIP으로 받는 편이 가장 쉽습니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+저장소 화면에서 오른쪽 위의 초록색 <strong>&lt;&gt; Code</strong> 버튼을 누르고, 펼쳐진 메뉴 맨 아래의 <strong>Download ZIP</strong>을 클릭하세요.
+</div>
+
+<div class="figure">
+<img src="screenshots/ch3/github-download.png" alt="Code 버튼을 눌러 Download ZIP을 선택하는 화면">
+<span class="cap">초록색 Code 버튼 → 펼쳐진 메뉴 맨 아래 <strong>Download ZIP</strong> 클릭.</span>
+</div>
+
+<div class="keypoint">
+<span class="t">팁</span>
+다운로드 알림이 안 보이면 브라우저의 다운로드 폴더(보통 <code>C:\Users\본인계정\Downloads</code>)를 확인하세요.
+</div>
+
+<div class="good"><span class="t">확인 방법</span>다운로드 폴더에 <code>BAI-workspace-main.zip</code> 같은 파일이 저장되면 성공입니다.</div>
+</div>
+
+<div class="step" id="ch3-s3">
+<h3>3. 압축 해제</h3>
+<p class="why">ZIP 안의 파일을 그대로는 쓸 수 없습니다. 압축을 풀어야 VSCode가 그 폴더를 열 수 있습니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+<ol>
+<li>다운로드한 <code>BAI-workspace-main.zip</code> 파일을 마우스 오른쪽 클릭 → <strong>압축 풀기(Extract All)</strong>를 선택하세요.</li>
+<li>찾기 쉬운 위치(<strong>바탕화면</strong>이나 <strong>문서 폴더</strong>)에 풉니다.</li>
+<li>압축이 풀리면 폴더 이름이 <code>BAI-workspace-main</code>처럼 길게 보일 수 있습니다. 원하면 <code>BAI-workspace</code>처럼 짧게 바꿔도 됩니다.</li>
+</ol>
+</div>
+
+<div class="warn">
+<span class="t">한국어 폴더 이름 주의</span>
+경로에 한국어가 들어가도 동작은 하지만, 초보 단계에서는 <strong>경로에 한국어/공백이 적은 위치</strong>에 풀어두면 나중에 오류가 적습니다.
+</div>
+
+<div class="good"><span class="t">확인 방법</span>풀어낸 폴더 안에 <code>README.md</code>, <code>00-inbox</code>, <code>10-projects</code>, <code>20-areas</code>, <code>30-resources</code>, <code>40-archive</code>, <code>scripts</code> 같은 파일과 폴더가 보이면 맞게 받은 것입니다.</div>
+</div>
+
+<div class="step" id="ch3-s4">
+<h3>4. VSCode에서 워크스페이스 폴더 열기</h3>
+<p class="why">VSCode는 "폴더"를 열어 그 안의 모든 파일을 한 작업 공간으로 다룹니다. 워크스페이스 폴더를 열어두면 좌측 탐색기에서 모든 파일에 바로 접근할 수 있습니다.</p>
+
+<div class="box">
+<span class="t">할 일</span>
+<ol>
+<li>VSCode를 엽니다.</li>
+<li>상단 메뉴 <strong>File → Open Folder…</strong> (또는 <code>Ctrl + K, Ctrl + O</code>)를 선택합니다.</li>
+<li>방금 압축을 푼 워크스페이스 폴더를 골라 <strong>폴더 선택</strong>을 누릅니다.</li>
+</ol>
+</div>
+
+<div class="figure">
+<img src="screenshots/ch3/step-4.png" alt="VSCode에서 File > Open Folder로 워크스페이스 폴더 열기">
+<span class="cap">File → Open Folder로 워크스페이스 폴더 열기.</span>
+</div>
+
+<div class="keypoint">
+<span class="t">"신뢰" 안내 창이 뜨면</span>
+폴더를 처음 열면 VSCode가 "이 폴더의 파일을 신뢰합니까?"라고 물을 수 있습니다. 본인이 받은 워크스페이스이므로 <strong>Yes, I trust the authors</strong>를 선택하세요.
+</div>
+
+<div class="good"><span class="t">확인 방법</span>왼쪽 파일 탐색기에 <code>README.md</code>, <code>00-inbox</code>, <code>10-projects</code>, <code>20-areas</code>, <code>30-resources</code>, <code>40-archive</code>, <code>scripts</code> 같은 파일과 폴더가 보이면 모든 챕터 완료입니다.</div>
+
+<div class="session-nav">
+<a href="#ch1">Ch1</a>
+<a href="#ch2">Ch2 (선택)</a>
+<a href="#ch3" class="current">Ch3</a>
+</div>
+</div>
+</section>
+
+</main>
+</div>
+<footer>바이브코딩 준비 가이드 · VSCode · Anaconda · GitHub 워크스페이스 다운로드</footer>
+</body>
+</html>
